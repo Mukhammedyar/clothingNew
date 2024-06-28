@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { complect, related } from '../helpers';
+import { related } from '../helpers';
 import ComplectsCard from './ComplectsCard';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 

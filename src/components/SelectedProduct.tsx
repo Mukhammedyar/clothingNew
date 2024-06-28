@@ -64,7 +64,7 @@ const SelectedProduct: React.FC<selectedProduct> = ({id}) => {
             <div className="flex items-center gap-5">
                 <p className="text-3xl">Sizes</p>
                 <div className="flex-center gap-5">
-                    {product?.sizes.map((size:string[]) => (
+                    {product?.sizes.map((size) => (
                         <div className="size-container text-3xl px-16 w-36">{size}</div>
                     ))}
                 </div>
@@ -73,7 +73,7 @@ const SelectedProduct: React.FC<selectedProduct> = ({id}) => {
             {/* Colours & button */}
         <div className="flex item-center justify-between gap-5 flex-col xl:flex-row">
             <div className="flex-center gap-4">
-                {customColor?.map((color, index)=> (
+                {customColor?.map((color)=> (
                     <div
                     style={{
                         backgroundImage: `linear-gradient(to right, ${color.color.from}, ${color.color.to})`

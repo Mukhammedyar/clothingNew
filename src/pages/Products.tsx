@@ -44,7 +44,7 @@ export const Products = () => {
             <img src={color} alt="color" className='w-24 h-24' onClick={()=> setOpen(!open)}/>
             <ModalColors handleColorClick={handleColorClick} className={`${open ? "flex" : "hidden"} absolute top-28 -left-24 z-10`} />
             <div className="flex items-center">
-              {lastFourColors.map((color, index) => (
+              {lastFourColors.map((color) => (
                 <div
                   style={{
                     backgroundImage: `linear-gradient(to right, ${color.color.from}, ${color.color.to})`
