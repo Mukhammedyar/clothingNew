@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.montserrat-normal {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.montserrat-medium {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+.montserrat-bold {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+.montserrat-extrabold {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .contain {
+    @apply px-10 md:px-16 2xl:px-[15%];
+  }
+  .border-card {
+    @apply border-[3px] border-zinc-900;
+  }
+  .focus-input {
+    @apply focus:outline-none;
+  }
+  .input-styles {
+    @apply w-full p-3 px-5 h-[70px] text-2xl rounded-s-full border-r-0 bg-black focus-input border-zinc-900 border-[1px];
+  }
+  .card-gradient-item {
+    @apply absolute bottom-0 z-0 flex montserrat-normal left-0 right-0 h-64 items-end px-5 bg-gradient-to-t from-zinc-950 rounded-s-3xl rounded-e-3xl via-transparent to-transparent;
+  }
+  .search-button {
+    @apply px-7 h-[70px] bg-black border-[1px] border-l-0 border-zinc-900 rounded-e-full;
+  }
+  .header {
+    @apply text-4xl montserrat-medium pb-9;
+  }
+  .subheader {
+    @apply text-2xl montserrat-normal text-zinc-300;
+  }
+  .add-to-cart-button {
+    @apply text-white rounded-full montserrat-medium text-2xl w-60 gap-3 flex-center py-4;
+  }
+  .size-container {
+    @apply flex-center cursor-pointer hover:bg-zinc-900 transition-all border-card rounded-full  p-4;
+  }
+}
+
+.add-to-cart-button {
+  background: linear-gradient(to right, #4c4bdd, #189f4f);
+}
+.add-to-cart-button:hover {
+  transition: all 2s ease-in;
+  background: linear-gradient(to right, #23a446, #e3b20a);
+}
