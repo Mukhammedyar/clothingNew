@@ -45,3 +45,56 @@ export interface complectsType {
     priceOff: number, 
     imgUrl: string
 }
+
+export interface categoryType{
+    _id: string | undefined,
+    name: string | undefined, 
+    type: string | undefined,
+    count: number,
+    imgUrl: string,
+}
+export interface ProductType{
+    name: string | undefined,
+    clotheId: string,
+    imgUrl: string,
+    sizes: string[],
+    color: string,
+    type: string,
+    complection: string[],
+    related: string[]
+}
+export interface apiProductType {
+    _id: string | undefined,
+    _v: number | undefined,
+    name: string | undefined,
+    categoryType: string | undefined,
+    type: string,
+    colors: apiColors[]
+}
+export interface apiColors{
+    color: string, 
+    colorCode: string[],
+    complect1: complect1Type[],
+    description: string,
+    detailsTitle: string,
+    detailsText: string,
+    compositionTitle: string,
+    compositionText: string,
+    imgUrl: string,
+    sizes: string[],
+    name: string | undefined,
+    type: string,
+}
+
+export interface complect1Type { 
+    color: string,
+    imgUrl:string | undefined,
+    name:string
+    sizes: string[]
+}
+
+
+
+export interface createCategoryType {
+    name: string, count: number, imgUrl: string
+  }

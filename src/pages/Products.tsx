@@ -4,18 +4,33 @@ import { BackButton } from '../components/BackButton'
 import ProductsCard from '../components/ProductsCard'
 import { color } from '../helpers/images'
 import ModalColors from '../components/ModalColors'
-import { useState } from 'react'
-import { colorsType } from '../helpers/types'
+import { useState,useEffect } from 'react'
+import { apiProductType, colorsType } from '../helpers/types'
+import { productFetching } from '../API/helpers'
 
 export const Products = () => {
   const [open, setOpen] = useState(false)
   const [lastFourColors, setLastFourColors] = useState<colorsType[]>(defaultColors);
+  const [products, setProducts] = useState<apiProductType[]>([])
   
   const { id } = useParams()
   const navigate = useNavigate()
   
-  const item = items.filter(item => item.title === id)
-  const products = item[0].products
+  useEffect(() => {
+    const getData = async () => {
+        try {
+          const productsArray = await productFetching({ type: 'get', data: undefined, id: undefined })
+          const products = productsArray.data.filter((one: apiProductType) => one.categoryType === id)
+          setProducts(products)
+          console.log(productsArray.data);
+          
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+    getData();
+  }, [])
 
   const handleColorClick = (color : colorsType) => {
     setLastFourColors((prevColors:colorsType[]) => {
@@ -31,32 +46,35 @@ export const Products = () => {
     return (
     <div className="bg-black min-h-screen text-white contain montserrat-normal">
       <div className="container mx-auto">
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-2 md:gap-5 py-5">
           <BackButton onClick={()=> navigate(-1)}/>
-          <h1 className="text-7xl font-bold mb-8 pt-10 montserrat-medium">
-            Select your {item[0].title.split(" ").pop()} look!
+          <h1 className="header-page montserrat-medium">
+            {/* Select your {id.split(" ").pop()}look! */}
+            Select your look!
           </h1>
         </div>
         {/* colors */}
-        <div className='flex items-center w-full mb-24 justify-between'>
-          <p className='text-3xl min-w-[250px] mr-5'>Search by colors:</p>
-          <div className='relative w-full flex items-center gap-5'>
-            <img src={color} alt="color" className='w-24 h-24' onClick={()=> setOpen(!open)}/>
-            <ModalColors handleColorClick={handleColorClick} className={`${open ? "flex" : "hidden"} absolute top-28 -left-24 z-10`} />
-            <div className="flex items-center">
-              {lastFourColors.map((color) => (
-                <div
-                  style={{
-                    backgroundImage: `linear-gradient(to right, ${color.color.from}, ${color.color.to})`
-                    }}
-                  className="w-16 h-16 rounded-full border-4 border-zinc-800"></div>  
-              ))}
+        <div className='colors_display w-full mb-10 gap-3'>
+          <div className="flex flex-col justify-end">
+            <p className='card-subtitle ml-2 text-zinc-500 min-w-[150px] sm:min-w-[160px] md:min-w-[180px]'>Search by color:</p>
+            <div className='relative w-[200px] md:w-[240px] justify-between flex items-center gap-2 border_full_rounded'>
+              <img src={color} alt="color" className='w-10 h-10 md:w-12 md:h-12 lg:w-12 lg:h-12 mr-5' onClick={()=> setOpen(!open)}/>
+              <ModalColors handleColorClick={handleColorClick} className={`${open ? "flex" : "hidden"} absolute top-28 -left-24 z-10`} />
+              <div className="flex items-center">
+                {lastFourColors.map((color) => (
+                  <div
+                    style={{
+                      backgroundImage: `linear-gradient(to right, ${color.color.from}, ${color.color.to})`
+                      }}
+                    className="-ml-4 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-zinc-800"></div>  
+                ))}
+              </div>
             </div>
           </div>
           {/* types */}
-          <div className='flex-center gap-5'>
+          <div className='flex lg:flex-center gap-2 sm:gap-2 md:gap-3 mt-5 text-zinc-500'>
               {ClothingCategores.map(type => (
-                <div className="size-container text-2xl">{type}</div>
+                <div className="size-container text-sm sm:text-md md:text-lg px-3 lg:px-5 py-2 ">{type}</div>
             ))}
           </div>
         </div>

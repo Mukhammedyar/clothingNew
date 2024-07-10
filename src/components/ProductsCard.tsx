@@ -1,33 +1,35 @@
 import { useNavigate } from "react-router-dom"
 import Card from "./Card"
-import { categoriesProduct } from "../helpers/types"
+import { apiProductType } from "../helpers/types"
 
 interface ProductsCardProps {
-    products: categoriesProduct[]
+    products: apiProductType[]
 }
 
 const ProductsCard: React.FC<ProductsCardProps> = ({ products }) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
     
+  // console.log(products);
+  
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-5 px-5 md:px-10">
     {products.map((item, index) => (
-      <Card index={index} onClick={()=> navigate('/products/'+ item.title)}>
+      <Card index={index} onClick={()=> navigate('/products/'+ item.name)}>
         <img
-            src={item.imgUrl}
-            alt={item.title}
+            src={item.colors[0].imgUrl}
+            alt={item.name}
             className="w-full h-full object-cover mb-4"
           />
           <div className="card-gradient-item ">
-          <div className="flex justify-between w-full mb-5 items-center">
-            <h2 className="text-lg 2xl:text-4xl">{item.title}</h2>
+          <div className="flex justify-between w-full card_text_container">
+            <h2 className="card-title md:text-md text-md ">{item.name}</h2>
             <div className='flex'>
-                {item.sizes.map((size, i) => (
+                {item.colors[0].sizes.map((size, i) => (
                   <>
-                    <p className="text-3xl montserrat-normal">{size}
-                      {i < item.sizes.length - 1 && (
-                      <span className="mx-2">,</span>
+                    <p className="sm:text-md card_subtitle">{size}
+                      {i < item.colors[0].sizes.length - 1 && (
+                      <span className="">,</span>
                       )}
                     </p>
                   </>  
